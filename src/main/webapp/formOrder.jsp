@@ -5,45 +5,57 @@
 <title>Insert title here</title>
 </head>
 <body>
-<header>
-        <h1>Gestion de comptes bancaires</h1>
 
-    </header>
 
-    <main>
-        <section id="form">
+	<form action="OrderServlet" method="post">
+		<p>
+			<label for="date">Date</label> <input type="date" name="date"
+				required> <br>
 
-            <form action="ServletAccount" method ="post">
-               <div class="c">
-                <label for="accountOwner">Titulaire</label>
-                <input type="text" name="accountOwner">
-            </div><div class="c">
-                <label for="num">Numero</label>
-                <input type="text" name="num">
-            </div><div class="c">
-                <label for="accountBalance">Solde, Credit ou Debit</label>
-                <input type="text" name="accountBalance">
-            </div><div class="c">
+		</p>
 
-                <input type="radio" name="account" value="Create"> <label for="">Créer un compte</label>
-                <input type="radio" name="account" value="Credit"> <label for="">Créditer un compte</label>
-                <input type="radio" name="account" value="Debit"> <label for="">Débiter un compte</label>
-            </div>
+		<p>
+			<label for="amount">Montant</label> <input type="text"
+				name="amount" required> <br>
 
-                <input type="submit" value="Executer">
-                <input type="reset" value ="Remise à zero">
-            </form>
-        </section>
+		</p>
 
-        <section id="bank">
+		<p>
+			<label for="payment">Mode de paiement</label> <input type="text"
+				name="payment" required> <br>
 
-        </section>
+		</p>
 
-    </main>
+		<p>
+			<label for="status">Statut du paiement</label> <input type="text"
+				name="paymentStatus"> <br>
 
-    <footer>
-        <p>Traitements</p>
-    </footer>
+		</p>
+
+		<p>
+			<label for="delivery">Mode de livraison</label> <input type="text"
+				name="delivery" required> <br>
+
+		</p>
+
+		<p>
+			<label for="deliveryStatus">Statut de la livraison</label> <input
+				type="text" name="deliveryStatus" required> <br>
+
+		</p>
+		<div class="button">
+			<input type="submit" value="Valider"> <input type="reset"
+				value="Remettre à zero">
+		</div>
+
+
+	</form>
+
+
+
+
+
+
 
 </body>
 </html>
