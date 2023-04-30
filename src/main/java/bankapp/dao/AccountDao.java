@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+
 import bankapp.model.Account;
 
 public class AccountDao {
@@ -81,5 +83,43 @@ public class AccountDao {
 		}
 
 		return cc;
+	}
+	
+	public void crediter(Account account, double amount) {
+
+		ArrayList<Account> tab = new ArrayList<>();
+
+		try {
+
+			
+			FileInputStream io = new FileInputStream("C:\\Users\\Jekyll\\Documents\\textJsp\\Account.txt");
+			ObjectInputStream o = new ObjectInputStream(io);
+			
+			tab = (ArrayList<Account>) o.readObject(); 
+
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace(); // 
+
+		}
+
+
+				double res = Account.getAccountBalance();
+				res += amount;
+				Account.setAccountBalance(res);
+				System.out.println("Youpi" + res);
+		
+
+		try {
+
+			
+			FileOutputStream io = new FileOutputStream("C:\\Users\\Jekyll\\Documents\\textJsp\\Account.txt");
+			ObjectOutputStream o = new ObjectOutputStream(io); 
+
+			o.writeObject(tab); 
+
+		} catch (IOException e) {
+			
+			e.printStackTrace(); 
+		}
 	}
 }
