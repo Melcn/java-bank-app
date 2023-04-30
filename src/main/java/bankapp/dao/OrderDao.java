@@ -11,7 +11,7 @@ import bankapp.model.Order;
 
 public class OrderDao {
 
-	public void ajouterCommande(Order cc) {
+	public void addOrder(Order cc) {
 
 		ArrayList<Order> tab = new ArrayList<>();
 
@@ -41,4 +41,26 @@ public class OrderDao {
 
 		}
 	}
+	
+	public ArrayList<Order> showAllOrders() {
+
+		ArrayList<Order> c = new ArrayList<>();
+
+		try {
+
+			FileInputStream io = new FileInputStream("C:\\Users\\Jekyll\\Documents\\textJsp\\Order.txt");
+			ObjectInputStream o = new ObjectInputStream(io);
+
+			c = (ArrayList<Order>) o.readObject();
+
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+
+		}
+
+		return c;
+
+	}
+	
+	
 }
