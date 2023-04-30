@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-
 import bankapp.model.Customer;
 
 
@@ -43,5 +42,23 @@ public class CustomerDao {
 		}
 	}
 	
-	
+	public ArrayList<Customer> showAllAccount() {
+
+		ArrayList<Customer> c = new ArrayList<>();
+
+		try {
+
+			FileInputStream io = new FileInputStream("C:\\Users\\Jekyll\\Documents\\textJsp\\Customer.txt");
+			ObjectInputStream o = new ObjectInputStream(io);
+
+			c = (ArrayList<Customer>) o.readObject();
+
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+
+		}
+
+		return c;
+
+	}
 }
