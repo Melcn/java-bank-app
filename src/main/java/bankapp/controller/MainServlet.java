@@ -2,13 +2,17 @@ package bankapp.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.compteDao;
+import Model.compte;
 import bankapp.dao.AccountDao;
+import bankapp.model.Account;
 import controlor.WebServlet;
 
 
@@ -36,8 +40,57 @@ public class MainServlet extends HttpServlet {
 	
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// doGet(request, response);
+		
+    	
+    	String owner = request.getParameter("owner");
+		Integer number = Integer.parseInt(request.getParameter("number"));
+		double sold = Double.parseDouble(request.getParameter("sold"));
+		String radioAccount = request.getParameter("account");
+
+		Account account = new Account();
+		account.setAccountOwner(owner);
+		account.setAccountNumber(number);
+		account.setAccountBalance(sold);
+
+		AccountDao accountDao = new AccountDao();
+		ArrayList<Account> arr = accountDao.showAllAccount();
+
+		switch (radioAccount) {
+		case "Create":
+			accountDao.addAcount(account);
+			break;
+
+		case "Credit":
+			
+			for (Account acc : arr) {
+
+				if (number == account.getAccountNumber()) {
+					accountDao.credit(account, sold);
+				}
+
+			}
+			
+		
+			break;
+
+		case "Debit":
+
+			for (Account acc : arr) {
+
+				if (number == account.getAccountNumber()) {
+					accountDao.debit(number, sold);
+				}
+
+			}
+			
+			
+			break;
+		}
+
+		request.setAttribute("account", account);
+		request.setAttribute("array", arr);
+
+		this.getServletContext().getRequestDispatcher("/WEB-INF/AccountView.jsp").forward(request, response);
 
 
 		
