@@ -2,21 +2,18 @@ package bankapp.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.ClicliDAO;
-import Model.Clicli;
-import bankapp.dao.CustomerDao;
-import bankapp.model.Customer;
+import bankapp.dao.AccountDao;
+import controlor.WebServlet;
 
 
 
-@WebServlet("/mappage")
+@WebServlet("/ServletAccount")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,11 +26,11 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		CustomerDao dao = new CustomerDao();
-		request.setAttribute("account", dao.showAllAccount());
+    	AccountDao accountDao = new AccountDao();
+		request.setAttribute("account", accountDao.showAllAccount());
 		PrintWriter p = response.getWriter();
 
-		p.print(dao.showAllAccount().toString());
+		p.print(accountDao.showAllAccount().toString());
 	}
 
 	
@@ -43,30 +40,7 @@ public class MainServlet extends HttpServlet {
 		// doGet(request, response);
 
 
-		String name = request.getParameter("name");
-		String firstName = request.getParameter("firstName");
-		String adress = request.getParameter("adress");
-		String tel = request.getParameter("tel");
-		String email = request.getParameter("email");
 		
-		Customer customer = new Customer();
-		customer.setCustomerName(name);
-		customer.setCustomerFirstName(firstName);
-		customer.setCustomerAdress(adress);
-		customer.setCustomerPhone(tel);
-		customer.setCustomerMail(email);
-		
-		CustomerDao customerDao = new CustomerDao();
-		customerDao.addAccount(customer);
-		ArrayList<Customer> arrayCustomer = customerDao.showAllAccount();
-		
-		
-
-		request.setAttribute("account", customer);
-		request.setAttribute("array", arrayCustomer);
-		
-
-		this.getServletContext().getRequestDispatcher("/WEB-INF/view.jsp").forward(request, response);
 	}
 
 }
