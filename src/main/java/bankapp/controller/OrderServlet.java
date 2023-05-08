@@ -47,10 +47,10 @@ public class OrderServlet extends HttpServlet {
 		OrderDao orderDao = new OrderDao();
 		orderDao.addOrder(order);
 		
-		ArrayList<Order> arrayCoco = OrderDao.showAllOrders();
+		ArrayList<Order> arrayOrder = OrderDao.showAllOrders();
 		
 		request.setAttribute("commande", order);
-		request.setAttribute("array", arrayCoco);
+		request.setAttribute("array", arrayOrder);
 		
 
 		this.getServletContext().getRequestDispatcher("/WEB-INF/OrderView.jsp").forward(request, response);
